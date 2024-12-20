@@ -46,19 +46,17 @@ void build_request(xway_paquet_t paquet, uint8_t * requete) {
     convert_mot(paquet.requete.adresse_premier_mot, adresse_premier_mot);
     convert_mot(paquet.requete.nb_mots, nb_mots);
 
-    if (adresse_premier_mot != 0 || nb_mots != 0) {
-        requete[req_off + 4] = adresse_premier_mot[0];
-        requete[req_off + 5] = adresse_premier_mot[1];
-        requete[req_off + 6] = nb_mots[0];
-        requete[req_off + 7] = nb_mots[1];
+    requete[req_off + 4] = adresse_premier_mot[0];
+    requete[req_off + 5] = adresse_premier_mot[1];
+    requete[req_off + 6] = nb_mots[0];
+    requete[req_off + 7] = nb_mots[1];
 
-        while (j < paquet.requete.nb_mots && (j + i < MAXEXTENSION)) {
-            convert_mot(paquet.requete.valeurs[j], values[j]);
-            requete[req_off + 8 + j * 2] = values[j][0];
-            requete[req_off + 9 + j * 2] = values[j][1];
-            j++;
-        }
-    }    
+    while (j < paquet.requete.nb_mots && (j + i < MAXEXTENSION)) {
+        convert_mot(paquet.requete.valeurs[j], values[j]);
+        requete[req_off + 8 + j * 2] = values[j][0];
+        requete[req_off + 9 + j * 2] = values[j][1];
+        j++;
+    }
 
     // en tête modbus
     request_length = 7 + i + 4 + (j + 1) * 2;

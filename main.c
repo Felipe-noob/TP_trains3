@@ -34,7 +34,7 @@ int main(int argc, char * argv[]) {
 	struct sockaddr_in addr_serv, addr_cli;
 	uint8_t reponse[MAXOCTETS];
 	int erreur, nbbytes;
-	int adr_len=sizeof(struct sockaddr_in);
+	unsigned int adr_len=sizeof(struct sockaddr_in);
 
 	uint8_t extension_data[MAXEXTENSION] = {0};
 
@@ -59,7 +59,7 @@ int main(int argc, char * argv[]) {
 	requete_unite.segment_objet = 0x68;
 	requete_unite.type_objet = 0x07;
 	requete_unite.adresse_premier_mot = 42;
-	requete_unite.nb_mots = 3;
+	requete_unite.nb_mots = 0;
 
 	mot_t valeurs[requete_unite.nb_mots];
 
@@ -67,12 +67,6 @@ int main(int argc, char * argv[]) {
 	valeurs[1] = -1;
 	valeurs[2] = 7;
 
-	if (valeurs == NULL) {
-		perror("Allocation fail !!!\n");
-		exit(1);
-	}
-
-	
 	requete_unite.valeurs = valeurs;
 	paquet.requete = requete_unite;
 
