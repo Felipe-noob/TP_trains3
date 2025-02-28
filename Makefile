@@ -5,3 +5,6 @@ build/tptrains3: main.c comm.c
 	clang-tidy $^
 	mkdir -p build
 	gcc $^ -o $@ -lpthread -Wall -Wextra --pedantic
+
+clean:
+	rm -fr build/*
