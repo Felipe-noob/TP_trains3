@@ -1,4 +1,7 @@
-all: tptrains3
+all: build/tptrains3
 
-tptrains3: main.c comm.c
-	gcc -o tptrains3 main.c comm.c -lpthread -Wall -Wextra --pedantic
+build/tptrains3: main.c comm.c
+	clang-format -i $^
+	clang-tidy $^
+	mkdir -p build
+	gcc $^ -o $@ -lpthread -Wall -Wextra --pedantic
